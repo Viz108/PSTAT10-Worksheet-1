@@ -1,0 +1,72 @@
+---
+title: "Worksheet 1"
+subtitle: "Vishal Seenivasan, 7095649"
+output: pdf_document
+---
+
+# Problem 1
+```{r, eval = FALSE}
+install.packages("here")
+library(here)
+set_here()
+here()
+here("week1_files")
+```
+
+# Problem 2
+```{r, eval = FALSE}
+heights_df <- read.csv(here("week1_files", "heights.csv"))
+summary(heights_df)
+sum(heights_df$height)
+```
+
+Response:\newline
+` ##86427`
+
+# Problem 3
+```{r, eval = FALSE}
+#Print hello world to console
+"hello world"
+
+#String concatentation
+x <- "hello"
+y <- "world"
+x + y #Incorrect string concatentation
+paste(x, y, sep = " ", collapse = NULL) #Correctly concatenates string
+paste0(x, y, collapse = NULL) #Concatenates string with no space in between 
+```
+
+Response: \newline
+` ## [1] "hello world"` \newline
+` ## Error in x + y : non-numeric argument to binary operator` \newline
+` ## [1] "hello world"` \newline
+` ## [1] "helloworld"` \newline
+
+The addition operator (+) cannot be used for string concatenation in R. String concatenation can
+be performed using the paste or paste0 function, where paste0 concatenates its input together with no
+seperating characters and paste concatenates its input with a given seperator character in between. 
+
+# Problem 4
+```{r, eval = FALSE}
+x <- 1:10
+x
+x[5] <- "cat"
+x
+x[5] <- TRUE
+x
+x <- 1:10
+x[5] <- TRUE
+x
+```
+
+Response: \newline
+` ##  [1]  1  2  3  4  5  6  7  8  9 10 `
+` ##  [1] "1"   "2"   "3"   "4"   "cat" "6"   "7"   "8"   "9"   "10"`
+` ##  [1] "1"    "2"    "3"    "4"    "TRUE" "6"    "7"    "8"    "9"    "10"  `
+` ##  [1]  1  2  3  4  1  6  7  8  9 10`
+
+When the fifth element of x is changed to "cat", all the elements of x change from integers to strings
+as well. When the fifth element is changed to TRUE, it becomes "TRUE" - that is, it remains a string. If 
+we changed the fifth element of x when it is all integers to TRUE, we see that it instead changes to 1 - that is, 
+it remains an integer. Thus, we can establish that the coercian hierarchy is, from bottom to top, with the top
+taking the most priority, logical types, integers, and finally strings. 
